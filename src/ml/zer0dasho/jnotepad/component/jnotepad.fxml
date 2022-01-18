@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ml.zer0dasho.jnotepad.controller.JWindowController">
+  <children>
+      <HBox fx:id="window_toolbar" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="640.0">
+         <children>
+            <Circle fx:id="close_button" fill="#ff1f1f" onMouseClicked="#closeWindow" radius="6.0" stroke="RED" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets bottom="3.0" left="6.0" top="3.0" />
+               </HBox.margin>
+            </Circle>
+         </children>
+      </HBox>
+    <MenuBar fx:id="window_menu">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#New" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#Open" text="Open…" />
+            <Menu disable="true" mnemonicParsing="false" text="Open Recent" visible="false" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#Save" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#SaveAs" text="Save As…" />
+            <MenuItem disable="true" mnemonicParsing="false" text="Revert" visible="false" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#Preferences" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#Close" text="Close" />
+            <MenuItem mnemonicParsing="false" onAction="#closeWindow" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <TabPane fx:id="window_content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="357.0" prefWidth="640.0" />
+  </children>
+</VBox>
