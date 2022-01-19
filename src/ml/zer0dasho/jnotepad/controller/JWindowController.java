@@ -3,6 +3,7 @@ package ml.zer0dasho.jnotepad.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -36,6 +39,8 @@ public class JWindowController implements Initializable {
 	@FXML private Circle close_button;
 	@FXML private MenuBar window_menu;
 	@FXML private TabPane window_content;
+	
+	private List<JTabController> tabs = new ArrayList<>();
 
 	// Controller
 	
@@ -124,6 +129,59 @@ public class JWindowController implements Initializable {
 		stage.close();
 	}
 	
+	@FXML
+	private void Undo(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.undo();
+	}
+	
+	@FXML
+	private void Redo(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.redo();
+	}
+	
+	@FXML
+	private void Cut(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.cut();
+	}
+	
+	@FXML
+	private void Copy(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.copy();
+	}
+	
+	@FXML
+	private void Paste(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.paste();
+	}
+	
+	@FXML
+	private void Delete(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.deleteText(tab_text_area.selectionProperty().get());
+	}
+	
+	@FXML
+	private void SelectAll(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.selectAll();
+	}
+	
+	@FXML
+	private void UnselectAll(ActionEvent e) {
+		TextArea tab_text_area = currentTab().tab_text_area;
+		tab_text_area.deselect();
+	}
+	
+	private JTabController currentTab() {
+		int index = window_content.getSelectionModel().getSelectedIndex();
+		return tabs.get(index);
+	}
+	
 	private void initPreferences() {
 		File file = new File("preferences.css");
 		
@@ -155,7 +213,17 @@ public class JWindowController implements Initializable {
 			controller.setModel(tab);
 			controller.tab.setOnCloseRequest((e) -> model.tabs.remove(tab));
 			
+			controller.tab_text_area.setOnDragOver((e) -> {
+				e.acceptTransferModes(TransferMode.COPY);
+			});
+			
+			controller.tab_text_area.setOnDragDropped((e) -> {
+				e.getDragboard().getFiles().forEach(model::open);
+			});
+			
+			tabs.add(controller);
 			window_content.getTabs().add(controller.tab);
+			window_content.getSelectionModel().selectLast();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -163,6 +231,7 @@ public class JWindowController implements Initializable {
 	}
 	
 	private void removeTab(int index) {
+		tabs.remove(index);
 		window_content.getTabs().remove(index);
 	}
 }

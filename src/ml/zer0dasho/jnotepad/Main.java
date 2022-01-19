@@ -1,5 +1,7 @@
 package ml.zer0dasho.jnotepad;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ml.zer0dasho.jnotepad.model.JTab;
@@ -14,6 +16,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		JWindow notepad = Notepad.create(stage);
-		notepad.tabs.add(new JTab("Untitled", ""));
+		
+		this.getParameters().getRaw().forEach(param -> {
+			File file = new File(param);
+			if(file.exists()) {
+				notepad.open(file);
+			}
+		});
+		
+		if(notepad.tabs.size() == 0)
+			notepad.tabs.add(new JTab("Untitled", ""));
 	}
 }

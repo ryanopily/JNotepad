@@ -6,11 +6,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<VBox fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ml.zer0dasho.jnotepad.controller.JWindowController">
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ml.zer0dasho.jnotepad.controller.JWindowController">
   <children>
       <HBox fx:id="window_toolbar" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="640.0">
          <children>
@@ -25,35 +26,56 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#New" text="New" />
-            <MenuItem mnemonicParsing="false" onAction="#Open" text="Open…" />
+            <MenuItem mnemonicParsing="false" onAction="#New" text="New">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#Open" text="Open…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <Menu disable="true" mnemonicParsing="false" text="Open Recent" visible="false" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#Save" text="Save" />
-            <MenuItem mnemonicParsing="false" onAction="#SaveAs" text="Save As…" />
+            <MenuItem mnemonicParsing="false" onAction="#Save" text="Save">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#SaveAs" text="Save As…">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <MenuItem disable="true" mnemonicParsing="false" text="Revert" visible="false" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#Preferences" text="Preferences…" />
+            <MenuItem mnemonicParsing="false" onAction="#Preferences" text="Preferences…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#Close" text="Close" />
-            <MenuItem mnemonicParsing="false" onAction="#closeWindow" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#Close" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#closeWindow" text="Quit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
+            <MenuItem mnemonicParsing="false" onAction="#Undo" text="Undo" />
+            <MenuItem mnemonicParsing="false" onAction="#Redo" text="Redo" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
+            <MenuItem mnemonicParsing="false" onAction="#Cut" text="Cut" />
+            <MenuItem mnemonicParsing="false" onAction="#Copy" text="Copy" />
+            <MenuItem mnemonicParsing="false" onAction="#Paste" text="Paste" />
+            <MenuItem mnemonicParsing="false" onAction="#Delete" text="Delete" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
+            <MenuItem mnemonicParsing="false" onAction="#SelectAll" text="Select All" />
+            <MenuItem mnemonicParsing="false" onAction="#UnselectAll" text="Unselect All" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu disable="true" mnemonicParsing="false" text="Help" visible="false">
           <items>
             <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
           </items>
